@@ -1,0 +1,32 @@
+services:
+  whisper:
+    build: .
+    restart: unless-stopped
+    environment:
+      WHISPER_MODEL: ${WHISPER_MODEL:-large-v3-turbo-q5_0}
+      WHISPER_LANG: ${WHISPER_LANG:-es}
+      WHISPER_THREADS: ${WHISPER_THREADS:-4}
+    volumes:
+      - models:/models
+    # Sin puertos publicados: solo Caddy llega a él, por la red interna.
+
+  caddy:
+    image: caddy:2.10-alpine
+    restart: unless-stopped
+    depends_on:
+      - whisper
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      DOMAIN: ${DOMAIN:?Falta DOMAIN en .env}
+      WHISPER_SECRET: ${WHISPER_SECRET:?Falta WHISPER_SECRET en .env}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  models:
+  caddy_data:
+  caddy_config:

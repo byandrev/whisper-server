@@ -1,0 +1,16 @@
+# HTTPS automático para {$DOMAIN} y nada pasa sin el secreto.
+# whisper-server no tiene autenticación propia: esta es la única puerta.
+{$DOMAIN} {
+	request_body {
+		max_size 10MB
+	}
+
+	@authorized header Authorization "Bearer {$WHISPER_SECRET}"
+	handle @authorized {
+		reverse_proxy whisper:8080
+	}
+
+	handle {
+		respond "Unauthorized" 401
+	}
+}
