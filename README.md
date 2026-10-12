@@ -2,7 +2,7 @@
 
 Transcripción de voz propia para los dictados del blog: [whisper.cpp](https://github.com/ggml-org/whisper.cpp)
 detrás de Caddy, que pone HTTPS y exige un secreto. Corre fuera de Vercel, en
-cualquier máquina con Docker (Oracle Cloud Always Free, un VPS, un ordenador de casa).
+cualquier máquina con Docker.
 
 ```
 móvil ──WAV──▶ Vercel (/api/...) ──WAV + Bearer──▶ Caddy ──▶ whisper-server ──▶ { "text": "…" }
@@ -10,7 +10,7 @@ móvil ──WAV──▶ Vercel (/api/...) ──WAV + Bearer──▶ Caddy �
 
 ## Puesta en marcha
 
-1. Apunta un dominio (p. ej. `whisper.byandrev.dev`) a la IP de la máquina y abre
+1. Apunta un dominio a la IP de la máquina y abre
    los puertos 80 y 443.
 2. Configura:
 
@@ -33,7 +33,7 @@ Compila en la propia máquina: el binario se optimiza para la CPU que lo constru
 
 ```bash
 curl -H "Authorization: Bearer $WHISPER_SECRET" \
-  https://whisper.byandrev.dev/inference \
+  https://{DOMINIO}/inference \
   -F file=@audio.wav -F response_format=json
 ```
 
