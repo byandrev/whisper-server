@@ -1,0 +1,7 @@
+# Solo para `docker compose up` en una máquina propia (se carga automáticamente).
+# Dokploy usa `-f docker-compose.yml` y lo ignora: allí Traefik ocupa el 80/443.
+services:
+  caddy:
+    ports:
+      - "80:80"
+      - "443:443"
