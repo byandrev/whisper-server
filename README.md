@@ -1,7 +1,7 @@
 # whisper-server
 
-Transcripción de voz propia para los dictados del blog: [whisper.cpp](https://github.com/ggml-org/whisper.cpp)
-detrás de Caddy, que pone HTTPS y exige un secreto. Corre fuera de Vercel, en
+Transcripción de voz propia para los dictados: [whisper.cpp](https://github.com/ggml-org/whisper.cpp)
+detrás de Caddy, que pone HTTPS y exige un secreto. Corre en
 cualquier máquina con Docker.
 
 ```
