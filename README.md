@@ -55,3 +55,14 @@ siguiente arranque (`docker compose up -d`).
 
 Pon `DOMAIN=:80` y Caddy sirve HTTP sin certificado; el túnel pone el HTTPS.
 El secreto se sigue exigiendo.
+
+## En Dokploy
+
+Dokploy ya tiene Traefik en los puertos 80 y 443, así que aquí Caddy no publica
+puertos (Dokploy lanza solo `docker-compose.yml` y no carga el
+`docker-compose.override.yml`). Traefik pone el HTTPS y Caddy sigue exigiendo el secreto:
+
+1. En *Environment*: `DOMAIN=:80`, `WHISPER_SECRET=…` y el resto de `.env.example`.
+2. En *Domains*: añade tu dominio con servicio `caddy`, puerto `80` y HTTPS
+   activado (Let's Encrypt).
+3. *Deploy*.
