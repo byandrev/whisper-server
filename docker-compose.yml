@@ -9,6 +9,11 @@ services:
     volumes:
       - models:/models
     # Sin puertos publicados: solo Caddy llega a él, por la red interna.
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
 
   caddy:
     image: caddy:2.10-alpine
